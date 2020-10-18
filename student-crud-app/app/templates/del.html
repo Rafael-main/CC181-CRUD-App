@@ -1,0 +1,13 @@
+
+<div class="modal-header" style="text-align:center;">
+    <h4 class="modal-title" style="color:red;" id="deleteModalLabel">You are going to Delete this forever !!</h4>
+</div>
+ 
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+    <form action="{{ url_for('delete') }}" id="deleteID" method="POST">
+        <input type="hidden" name="delInputID" value="{{ row['STUDENT_ID'] }}">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
+</div>
+     

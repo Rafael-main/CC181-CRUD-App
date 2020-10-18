@@ -1,0 +1,52 @@
+
+
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Add Student Record</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+        <form action="{{ url_for('index') }}" id="formAdd" method="POST">
+            <div class="form-group">
+                <label for="inputID">Student ID</label>
+                <input type="text" class="form-control" id="inputID" name="inputID" placeholder="2019-0001" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputFirst">First Name</label>
+                    <input type="text" class="form-control" id="inputFirst" name="inputFirst" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputLast">Last Name</label>
+                    <input type="text" class="form-control" id="inputLast" name="inputLast" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputCollege">College</label>
+                    <select id="inputCollege" name="inputCollege" class="form-control" required>
+                        <option selected>Choose...</option>
+                        <option>CCS</option>
+                        <option>COET</option>
+                        <option>CON</option>
+                        <option>CSM</option>
+                        <option>CED</option>
+                        <option>CBAA</option>
+                        <option>CASS</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                <label for="inputCourse">Course</label>
+                <input type="text" class="form-control" id="inputCourse" name="inputCourse" placeholder="Ex. BSA" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputYear">Year</label>
+                    <input type="text" class="form-control" id="inputYear" name="inputYear" required>
+                </div>
+    </div>
+    <div class="modal-footer">
+    
+    <button type="submit" class="btn btn-primary">Add Record</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </form>
+    </div>

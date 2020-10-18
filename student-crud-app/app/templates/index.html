@@ -1,0 +1,88 @@
+{% extends 'layout/master_layout.html' %}
+
+{% block content %}
+
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1 ml-4">Student App CRUD</span>
+    </nav>
+    <div>
+        <h1 class="ml-5 mt-2">STUDENT RECORDS</h1>
+    </div>
+    <div>
+        <!-- Button trigger modal -->
+        <button type="button" class="ml-5 btn btn-success" data-toggle="modal" data-target="#exampleModal">
+            Add Record
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                {% include "add.html" %}
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped mt-3">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">Student ID</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">College</th>
+                        <th scope="col">Course</th>
+                        <th scope="col">Year</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      {% for row in rows %}
+                        <tr>
+                            <th scope="row">{{row.STUDENT_ID}}</th>
+                            <td>{{row['STUDENT_LAST_NAME']}}</td>
+                            <td>{{row['STUDENT_FIRST_NAME']}}</td>
+                            <td>{{row['STUDENT_COLLEGE']}}</td>
+                            <td>{{row['STUDENT_COURSE']}}</td>
+                            <td>{{row['STUDENT_YEAR']}}</td>
+                            <td>
+                            <div>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal{{ row['STUDENT_ID'] }}">
+                                Edit
+                                </button>
+                                <!-- Modal EDIT STUDENT -->
+                                <div class="modal fade" id="editModal{{ row['STUDENT_ID'] }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        {% include "edit.html" %}
+                                    </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ row['STUDENT_ID'] }}">
+                                Delete
+                                </button>
+                                <!--<a data-id=${Id} onclick="ConfirmDelete(this)" ><span class="glyphicon glyphicon-trash"></span></a>-->
+                                <!-- Modal DELETE STUDENT -->
+                                <div class="modal fade" id="deleteModal{{ row['STUDENT_ID'] }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        {% include "del.html" %}
+                                    </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
