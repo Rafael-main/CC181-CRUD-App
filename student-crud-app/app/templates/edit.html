@@ -1,55 +1,63 @@
 
-
-  <div class="modal-header">
-    <h5 class="modal-title" id="editModal">Edit Student Record</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    </div>
-    <div class="modal-body">
-        <form action="{{ url_for('edit') }}" id="formEdit" method="POST">
-            <input type="hidden" name="editInputID" value="{{ row['STUDENT_ID'] }}">
-            <fieldset disabled>
-                <div class="form-group">
-                    <label for="editInputID">Student ID</label>
-                    <input type="text" class="form-control" id="editInputID" name="editInputID" value="{{ row['STUDENT_ID'] }}" required>
-                </div>
-            </fieldset>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="editInputFirst">First Name</label>
-                    <input type="text" class="form-control" id="editInputFirst" name="editInputFirst" placeholder="Ex. Don Juan" required>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="editInputLast">Last Name</label>
-                    <input type="text" class="form-control" id="editInputLast" name="editInputLast" placeholder="Ex. Calbareza" required>
-                </div>
+<div class="modal fade form-modal" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content"> 
+            <div class="modal-header">
+            <h5 class="modal-title" id="editModal">Edit Student Record</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
             </div>
-            <div class="form-group">
-                <label for="editInputCollege">College</label>
-                    <select id="editInputCollege" name="editInputCollege" class="form-control" required>
-                        <option selected>Choose...</option>
-                        <option>CCS</option>
-                        <option>COET</option>
-                        <option>CON</option>
-                        <option>CSM</option>
-                        <option>CED</option>
-                        <option>CBAA</option>
-                        <option>CASS</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                <label for="inputCourse">Course</label>
-                <input type="text" class="form-control" id="editInputCourse" name="editInputCourse" placeholder="Ex. BSA" required>
-                </div>
-                <div class="form-group">
-                    <label for="editInputYear">Year</label>
-                    <input type="text" class="form-control" id="editInputYear" name="editInputYear" placeholder="Ex. 1" required>
-                </div>
+            <div class="modal-body">
+                <form action="{{ url_for('edit') }}" id="formEdit" method="POST">
+                    <input type="hidden" name="editInputID" value="{{row[STUDENT_ID]}}">
+                    <div class="form-group">
+                        <label for="editInputID">Student ID</label>
+                        <input type="tel" pattern="[0-9]{4}-[0-9]{4}" class="form-control" id="editInputID" name="editInputID"  value="{{row['STUDENT_ID']}}" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="editInputFirst">First Name</label>
+                            <input type="text" class="form-control" id="editInputFirst" name="editInputFirst" value="{{row['STUDENT_FIRST_NAME']}}" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="editInputLast">Last Name</label>
+                            <input type="text" class="form-control" id="editInputLast" name="editInputLast" value="{{row['STUDENT_LAST_NAME']}}" required>
+                        </div>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label for="editInputCourse">Course</label>
+                        <select id="editInputCourse" name="editInputCourse" class="form-control selectpicker" data-live-search="true" required>
+                            <option value="{{row['STUDENT_COURSE']}}" selected>{{row['STUDENT_COURSE']}}</option>
+                            {% for l in rows_course %}
+                                <option value="{{ l[0] }}">{{l[1]}}</option>
+                            {% endfor %}
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="editInputGender">Gender</label>
+                        <select id="editInputGender" name="editInputGender" class="form-control" required>
+                            <option value="{{row['STUDENT_GENDER']}}" selected>{{row['STUDENT_GENDER']}}</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Transgender</option>
+                            <option>Genderqueer</option>
+                            <option>Neutral</option>
+                        </select>
+                    </div>
+                        <div class="form-group">
+                            <label for="editInputYear">Year</label>
+                            <input type="number" class="form-control" id="editInputYear" name="editInputYear" value="{{row['STUDENT_YEAR']}}" required>
+                        </div>
+            </div>
+            <div class="modal-footer">
+
+            <button type="submit" class="btn btn-primary">Edit Record</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </form>
+            </div>
+        </div>
     </div>
-    <div class="modal-footer">
-    
-    <button type="submit" class="btn btn-primary">Edit Record</button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    </form>
-    </div>
+</div>
