@@ -17,7 +17,7 @@ def index():
 def some_list():
     user = models.Joined()
     rows_deptcolcor = user.read_on_all()
-    return render_template('dept_course.html', rows=rows_deptcolcor)
+    return render_template('index2.html', rows=rows_deptcolcor)
 
 @app.route('/_add', methods=['POST'])
 def add():
@@ -30,8 +30,9 @@ def add():
         course = request.form['inputCourse']
         gender = request.form['inputGender']
         year = int(request.form['inputYear'])
+        college = request.form['inputCollege']
         data_col_dept = col.select_college(course)
-        college = data_col_dept[0][0]
+        
         dept = data_col_dept[0][1]
 
         
@@ -40,20 +41,24 @@ def add():
         return redirect('/')
 
 
-@app.route('/_edit', methods=['POST'])
+@app.route('/edit', methods=['POST'])
 def edit():
     user = models.Student()
     col = models.Joined()
     if request.method == 'POST':
+        edit_this_idid = request.form['editThisInputID']
         edit_idid = request.form['editInputID']
         edit_first = str(request.form['editInputFirst']).capitalize()
         edit_last = str(request.form['editInputLast']).capitalize()
         edit_course = request.form['editInputCourse']
+        edit_college = request.form['editInputCollege']
+        edit_gender = request.form['editInputGender']
         edit_year = int(request.form['editInputYear'])
+
         data_col_dept = col.select_college(edit_course)
-        edit_college = data_col_dept[0][0]
         edit_dept = data_col_dept[0][1]
-        user.update(edit_idid, edit_first, edit_last, edit_college, edit_course, edit_year,edit_dept)
+        
+        user.update(edit_idid, edit_first, edit_last, edit_college, edit_course, edit_gender,edit_year,edit_dept,edit_this_idid)
         flash("Record Edited!", "success")
         return redirect('/')
 
