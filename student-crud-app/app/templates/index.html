@@ -24,7 +24,7 @@
         {% include 'add.html' %}
     </div>
 
-    <div class="container fluid">
+    <div class="container">
         <div class="row">
             <div class="col">
                 <table class="table table-striped mt-3" id = "location">
@@ -55,24 +55,26 @@
                             <td class="year">{{row['STUDENT_YEAR']}}</td>
                             <td>
                             <div>
-                                <button type="button" class="btn btn-primary edit" data-toggle="modal" data-target="#editModal">
+                                <a href="#" type="button" class="btn btn-primary edit" data-toggle="modal" data-target="#editModal{{ row['STUDENT_ID'] }}">
                                 Edit
-                                </button>
+                                </a>
                                 <!-- Modal EDIT STUDENT -->
-                                {% include "edit.html" %}
+                                {% include 'edit.html' %}
+                                <!-- <a href="#" type="button" class="btn btn-primary edit" data-toggle="modal" data-target="#editModal" data-idid="{{row['STUDENT_ID']}}" data-fname="{{ row['STUDENT_FIRST_NAME'] }}" data-lname="{{row['STUDENT_LAST_NAME']}}" data-col="{{row['STUDENT_COLLEGE']}}" data-cor="{{row['STUDENT_COURSE']}}" data-gen="{{row['STUDENT_GENDER']}}" data-yr="{{row['STUDENT_YEAR']}}"></a> -->
                                 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{ row['STUDENT_ID'] }}">
                                 Delete
                                 </button>
-                                <!--<a data-id=${Id} onclick="ConfirmDelete(this)" ><span class="glyphicon glyphicon-trash"></span></a>-->
+                               
                                 <!-- Modal DELETE STUDENT -->
-                                <div class="modal fade" id="deleteModal{{ row['STUDENT_ID'] }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        {% include "del.html" %}
+                                    <div class="modal fade" id="deleteModal{{ row['STUDENT_ID'] }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                {% include "del.html" %}
+                                            </div>
+                                        </div>
                                     </div>
-                                    </div>
-                                </div>
-                            </td>
+                                </td>
+                            </div>
                         </tr>
                         {% endfor %}
                     </tbody>
